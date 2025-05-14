@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:portalixmx_visitor_app/features/main_menu/access_page.dart';
 import 'package:portalixmx_visitor_app/features/main_menu/home_page.dart';
-import 'package:portalixmx_visitor_app/features/main_menu/profile_page.dart';
+import 'package:portalixmx_visitor_app/features/main_menu/profile_menu/profile_page.dart';
 import 'package:provider/provider.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
@@ -88,7 +88,7 @@ class MainMenuPage extends StatelessWidget{
         return AccessPage();
 
       case 2:
-        return ProfilePage();
+        return ProfileMenu();
 
       default:
         return QRCodePage();
