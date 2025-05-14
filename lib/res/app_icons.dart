@@ -1,17 +1,10 @@
 class AppIcons {
   static const icSplashLogo = 'assets/icons/ic_splash.png';
   static const icScreenBg = 'assets/icons/ic_screen_bg.png';
-  static const icHomeMenu = 'assets/icons/ic_home_menu.svg';
-  static const icSecurityAlerts  = 'assets/icons/ic_security_alert.svg';
-  static const icReports  = 'assets/icons/ic_reports.svg';
-  static const icMenu = 'assets/icons/ic_menu.svg';
-  static const icAdd = 'assets/icons/ic_add.svg';
-  static const icScanner = 'assets/icons/ic_scanner.svg';
-  static const icLogsIn = 'assets/icons/ic_logs_in.svg';
-  static const icLogsOut = 'assets/icons/ic_logs_out.svg';
-  static const icGuestVerified  ='assets/icons/ic_guest_verified.svg';
-  static const icCamera = 'assets/icons/ic_camera.svg';
-  static const icUploadPhotos = 'assets/icons/ic_upload_photos.svg';
+  static const icQRCodeMenu = 'assets/icons/ic_qr_code.svg';
+  static const icAccessMenu = 'assets/icons/ic_access.svg';
+  static const icProfileMenu = 'assets/icons/ic_profile.svg';
+
   static const icEmergencyCalls = 'assets/icons/ic_emergency_calls.svg';
   static const icProfileEdit = 'assets/icons/ic_profile_edit.svg';
 

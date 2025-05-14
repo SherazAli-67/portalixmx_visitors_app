@@ -1,4 +1,5 @@
-=import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:portalixmx_visitor_app/features/main_menu/main_menu_page.dart';
 import 'package:portalixmx_visitor_app/res/app_colors.dart';
 import 'package:portalixmx_visitor_app/res/app_textstyles.dart';
 import 'package:portalixmx_visitor_app/widgets/app_textfield_widget.dart';
@@ -98,7 +99,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                       height: 50,
                       width: double.infinity,
                       child: PrimaryBtn(onTap: (){
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> CreateProfilePage()), (val)=> false);
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> MainMenuPage()), (val)=> false);
                       }, btnText: "Next"),
                     ),
                   ],

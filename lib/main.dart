@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:portalixmx_visitor_app/features/login_page.dart';
+import 'package:portalixmx_visitor_app/features/main_menu/main_menu_page.dart';
+import 'package:portalixmx_visitor_app/features/provider/tab_change_provider.dart';
 import 'package:portalixmx_visitor_app/res/app_colors.dart';
 import 'package:portalixmx_visitor_app/res/app_constants.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_)=> TabChangeProvider())
+  ], child: MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
 
             )
         ),
-        home: LoginPage()
+        home: MainMenuPage()
     );
   }
 }
