@@ -82,7 +82,7 @@ class MainMenuPage extends StatelessWidget{
   Widget _buildPage(int currentIndex) {
     switch(currentIndex){
       case 0:
-        return HomePage();
+        return QRCodePage();
 
       case 1:
         return AccessPage();
@@ -91,7 +91,7 @@ class MainMenuPage extends StatelessWidget{
         return ProfilePage();
 
       default:
-        return HomePage();
+        return QRCodePage();
     }
   }
 
