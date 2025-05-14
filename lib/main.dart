@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portalixmx_visitor_app/login_page.dart';
+import 'package:portalixmx_visitor_app/features/login_page.dart';
 import 'package:portalixmx_visitor_app/res/app_colors.dart';
 import 'package:portalixmx_visitor_app/res/app_constants.dart';
 

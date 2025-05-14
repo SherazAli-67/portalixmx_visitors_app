@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:portalixmx_visitor_app/features/create_profile_page.dart';
 import 'package:portalixmx_visitor_app/widgets/app_textfield_widget.dart';
 import 'package:portalixmx_visitor_app/widgets/primary_btn.dart';
 
-import '../../res/app_textstyles.dart';
-import 'widgets/bg_logo_screen.dart';
+import '../../../res/app_textstyles.dart';
+import '../widgets/bg_logo_screen.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           spacing: 16,
           children: [
-            Text("Guard Login", style: AppTextStyles.headingTextStyle),
+            Text("Visitor Login", style: AppTextStyles.headingTextStyle),
             const SizedBox(height: 16,),
             AppTextField(textController: _emailController, hintText: "Email",),
             AppTextField(textController: _passwordController, hintText: "Password", isPassword: true,),
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 50,
               width: double.infinity,
               child: PrimaryBtn(onTap: (){
-                // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> MainMenuPage()), (val)=> false);
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> CreateProfilePage()), (val)=> false);
               }, btnText: "Log in"),
             ),
             TextButton(onPressed: (){
