@@ -5,6 +5,7 @@ import 'package:portalixmx_visitor_app/widgets/primary_btn.dart';
 
 import '../../../res/app_textstyles.dart';
 import '../widgets/bg_logo_screen.dart';
+import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -25,21 +26,21 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           spacing: 16,
           children: [
-            Text("Visitor Login", style: AppTextStyles.headingTextStyle),
+            Text(AppLocalizations.of(context)!.visitorLogin, style: AppTextStyles.headingTextStyle),
             const SizedBox(height: 16,),
-            AppTextField(textController: _emailController, hintText: "Email",),
-            AppTextField(textController: _passwordController, hintText: "Password", isPassword: true,),
+            AppTextField(textController: _emailController, hintText: AppLocalizations.of(context)!.email,),
+            AppTextField(textController: _passwordController, hintText: AppLocalizations.of(context)!.password, isPassword: true,),
             const Spacer(),
             SizedBox(
               height: 50,
               width: double.infinity,
               child: PrimaryBtn(onTap: (){
                 Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> CreateProfilePage()), (val)=> false);
-              }, btnText: "Log in"),
+              }, btnText: AppLocalizations.of(context)!.login),
             ),
             TextButton(onPressed: (){
               // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> OtpPage()));
-            }, child: Text("Forgot your password", style: AppTextStyles.btnTextStyle,))
+            }, child: Text(AppLocalizations.of(context)!.forgetPassword, style: AppTextStyles.btnTextStyle,))
           ],
         ),
       ),

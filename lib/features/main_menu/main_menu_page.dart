@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:portalixmx_visitor_app/features/main_menu/access_page.dart';
-import 'package:portalixmx_visitor_app/features/main_menu/home_page.dart';
+import 'package:portalixmx_visitor_app/features/main_menu/qr_code_homepage.dart';
 import 'package:portalixmx_visitor_app/features/main_menu/profile_menu/profile_page.dart';
+import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
@@ -28,9 +29,9 @@ class MainMenuPage extends StatelessWidget{
               unselectedLabelStyle: TextStyle(fontSize: 12, color: Colors.white),
 
               items: [
-                _buildBottomNavigationItemWidget(icon: AppIcons.icQRCodeMenu, label: 'QR Code', isSelected: provider.currentIndex == 0),
-                _buildBottomNavigationItemWidget(icon: AppIcons.icAccessMenu, label: 'Access', isSelected: provider.currentIndex == 1),
-                _buildBottomNavigationItemWidget(icon: AppIcons.icProfileMenu, label: 'Profile', isSelected: provider.currentIndex == 2),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icQRCodeMenu, label: AppLocalizations.of(context)!.qrCode, isSelected: provider.currentIndex == 0),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icAccessMenu, label: AppLocalizations.of(context)!.access, isSelected: provider.currentIndex == 1),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icProfileMenu, label: AppLocalizations.of(context)!.profile, isSelected: provider.currentIndex == 2),
 
               ]),
         ),

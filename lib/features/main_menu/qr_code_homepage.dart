@@ -4,6 +4,7 @@ import '../../res/app_colors.dart';
 import '../../res/app_icons.dart';
 import '../../res/app_textstyles.dart';
 import '../../widgets/primary_btn.dart';
+import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 
 class QRCodePage extends StatelessWidget{
   const QRCodePage({super.key});
@@ -22,7 +23,7 @@ class QRCodePage extends StatelessWidget{
                   backgroundColor: AppColors.btnColor,
                   child: Center(child: Icon(Icons.person, color: Colors.white,),),
                 ),
-                Text("Welcome Alex", style: AppTextStyles.regularTextStyle,)
+                Text(AppLocalizations.of(context)!.welcomeMessage("Alex"), style: AppTextStyles.regularTextStyle,)
               ],
             ),
             Row(
@@ -30,11 +31,11 @@ class QRCodePage extends StatelessWidget{
               children: [
                 Expanded(
                   child: _buildInfoItemWidget(
-                    title: 'Date', subtitle: 'Sep 20, 2024',showDivider: true,),
+                    title: AppLocalizations.of(context)!.name, subtitle: 'Alex',showDivider: true,),
                 ),
                 Expanded(
                     child: _buildInfoItemWidget(
-                      title: 'Time', subtitle: '10:00AM - 06:00PM',showDivider: true,)
+                      title: AppLocalizations.of(context)!.contact, subtitle: '+91 1335789',showDivider: true,)
                 ),
               ],
             ),
@@ -43,16 +44,16 @@ class QRCodePage extends StatelessWidget{
               children: [
                 Expanded(
                   child: _buildInfoItemWidget(
-                    title: 'Requested Time', subtitle: 'Sep 20, 2024',),
+                    title: AppLocalizations.of(context)!.date, subtitle: 'Sep 20, 2024',),
                 ),
                 Expanded(
                     child: _buildInfoItemWidget(
-                      title: 'Access Approved Date', subtitle: '10:00AM - 06:00PM',)
+                      title: AppLocalizations.of(context)!.time, subtitle: '10:00AM - 06:00PM',)
                 ),
               ],
             ),
             const SizedBox(height: 20,),
-            Text("QR CODE", style: AppTextStyles.visitorDetailTitleTextStyle.copyWith(color: Colors.white),),
+            Text(AppLocalizations.of(context)!.qrCode, style: AppTextStyles.visitorDetailTitleTextStyle.copyWith(color: Colors.white),),
             Image.asset(AppIcons.icQRCode),
             const Spacer(),
             Container(
@@ -60,7 +61,7 @@ class QRCodePage extends StatelessWidget{
               margin: EdgeInsets.only(bottom: 40),
               width: double.infinity,
               child: PrimaryBtn(
-                onTap: () {}, btnText: "Share Key", color: AppColors.primaryColor,),
+                onTap: () {}, btnText: AppLocalizations.of(context)!.shareKey, color: AppColors.primaryColor,),
             )
           ],
         )

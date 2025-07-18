@@ -1,0 +1,31 @@
+{
+  "es": [
+    "visitorLogin",
+    "visitors",
+    "fullName",
+    "emailAddress",
+    "identificationTypeAndNumber",
+    "vehicleInformation",
+    "licensePlate",
+    "vehicleModel",
+    "vehicleColor",
+    "purposeOfVisit",
+    "next",
+    "createProfile",
+    "qrCode",
+    "access",
+    "profile",
+    "date",
+    "time",
+    "contact",
+    "name",
+    "shareKey",
+    "viewProfile",
+    "emergencyCalls",
+    "privacyPolicy",
+    "logout",
+    "update",
+    "emergency",
+    "phone"
+  ]
+}

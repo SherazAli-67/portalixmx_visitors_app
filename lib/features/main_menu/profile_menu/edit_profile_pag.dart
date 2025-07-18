@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
@@ -22,7 +23,7 @@ class EditProfilePage extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BackButton(color: Colors.white,),
-              Text("Profile", style: AppTextStyles.regularTextStyle,),
+              Text(AppLocalizations.of(context)!.profile, style: AppTextStyles.regularTextStyle,),
               const SizedBox(width: 40,)
             ],
           ),
@@ -48,30 +49,30 @@ class EditProfilePage extends StatelessWidget{
                             child: ListView(
                               children: [
                                 EditProfileItemWidget(
-                                  title: "Name", value: "Muhammad Ali", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.name, value: "Muhammad Ali", onTap: () {},),
                                 EditProfileItemWidget(
-                                  title: "Email", value: "imtiazkhansoomro@gmail.com", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.email, value: "imtiazkhansoomro@gmail.com", onTap: () {},),
                                 EditProfileItemWidget(
-                                  title: "Phone", value: "+92 3072215500", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.phone, value: "+92 3072215500", onTap: () {},),
                                 EditProfileItemWidget(
-                                  title: "Password", value: "*********", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.password, value: "*********", onTap: () {},),
 
                                 const SizedBox(height: 30,),
-                                Text("Vehicle Information", style: TextStyle(fontSize: 15,
+                                Text(AppLocalizations.of(context)!.vehicleInformation, style: TextStyle(fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.primaryColor),),
 
                                 EditProfileItemWidget(
-                                  title: "Vehicle Name", value: "Motorolla Car", onTap: () {},),
-                                EditProfileItemWidget(title: "Color", value: "Red", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.vehicleModel, value: "Motorolla Car", onTap: () {},),
+                                EditProfileItemWidget(title: AppLocalizations.of(context)!.vehicleColor, value: "Red", onTap: () {},),
                                 EditProfileItemWidget(
-                                  title: "License Plate Number", value: "KL76 HJ 8979", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.licensePlate, value: "KL76 HJ 8979", onTap: () {},),
                                 Padding(
                                   padding: EdgeInsets.only(top: 40,bottom: size.height*0.05),
                                   child: SizedBox(
                                     height: 50,
                                     width: double.infinity,
-                                    child: PrimaryBtn(onTap: () {}, btnText: "Update"),
+                                    child: PrimaryBtn(onTap: () {}, btnText: AppLocalizations.of(context)!.update),
                                   ),
                                 ),
                               ],
@@ -95,7 +96,7 @@ class EditProfilePage extends StatelessWidget{
                         onTap: (){
                           // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> EditProfilePage()));
                         },
-                        child: Text("View Profile", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black),))
+                        child: Text(AppLocalizations.of(context)!.viewProfile, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black),))
                   ],
                 ),
               ],
@@ -137,8 +138,6 @@ class EditProfileItemWidget extends StatelessWidget {
               Divider()
             ],
           )
-
-
         ],
       ),
     );

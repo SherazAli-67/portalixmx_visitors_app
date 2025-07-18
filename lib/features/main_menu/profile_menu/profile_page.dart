@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 
 import '../../../../res/app_icons.dart';
 import '../../../../res/app_textstyles.dart';
@@ -34,16 +35,16 @@ class ProfileMenu extends StatelessWidget{
                     onTap: (){
                       Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> EditProfilePage()));
                     },
-                    child: Text("View Profile", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.white),))
+                    child: Text(AppLocalizations.of(context)!.viewProfile, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.white),))
               ],
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProfileItemWidget(title: "Emergency Calls", icon: AppIcons.icEmergencyCalls, onTap: ()=> _onEmergencyTap(context)),
-              TextButton(onPressed: (){}, child: Text("Privacy Policy", style: AppTextStyles.tileTitleTextStyle2,)),
-              TextButton(onPressed: (){}, child: Text("Log out", style: AppTextStyles.tileTitleTextStyle2,)),
+              ProfileItemWidget(title: AppLocalizations.of(context)!.emergencyCalls, icon: AppIcons.icEmergencyCalls, onTap: ()=> _onEmergencyTap(context)),
+              TextButton(onPressed: (){}, child: Text(AppLocalizations.of(context)!.privacyPolicy, style: AppTextStyles.tileTitleTextStyle2,)),
+              TextButton(onPressed: (){}, child: Text(AppLocalizations.of(context)!.logout, style: AppTextStyles.tileTitleTextStyle2,)),
 
             ],
           )

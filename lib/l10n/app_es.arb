@@ -1,0 +1,15 @@
+{
+  "@@locale": "es",
+  "appTitle": "PortalixMX",
+  "welcomeMessage": "Bienvenido {name}",
+  "regularVisitors": "Visitantes Regulares",
+  "guest": "Invitado",
+  "accessRequests": "Solicitudes de Acceso",
+  "poolAccess": "Acceso a la Piscina",
+  "add": "Agregar",
+  "guardLogin": "Guard Login",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "forgetPassword": "Forget your password"
+}
