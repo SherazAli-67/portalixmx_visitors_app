@@ -7,7 +7,7 @@ import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
-import '../provider/tab_change_provider.dart';
+import '../../providers/tab_change_provider.dart';
 class MainMenuPage extends StatelessWidget{
   const MainMenuPage({super.key});
 

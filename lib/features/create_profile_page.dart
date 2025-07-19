@@ -99,9 +99,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                     SizedBox(
                       height: 50,
                       width: double.infinity,
-                      child: PrimaryBtn(onTap: (){
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> MainMenuPage()), (val)=> false);
-                      }, btnText: AppLocalizations.of(context)!.next),
+                      child: PrimaryBtn(onTap: _onNextTap, btnText: AppLocalizations.of(context)!.next,),
                     ),
                   ],
                 ),
@@ -111,5 +109,9 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
         ),
       ),
     );
+  }
+
+  void _onNextTap(){
+
   }
 }
