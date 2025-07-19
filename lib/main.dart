@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portalixmx_visitor_app/features/login_page.dart';
 import 'package:portalixmx_visitor_app/providers/auth_provider.dart';
+import 'package:portalixmx_visitor_app/providers/profile_provider.dart';
 import 'package:portalixmx_visitor_app/res/app_colors.dart';
 import 'package:portalixmx_visitor_app/res/app_constants.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ void main() {
     ChangeNotifierProvider(create: (_)=> TabChangeProvider()),
     ChangeNotifierProvider(create: (_)=> LocaleProvider()),
     ChangeNotifierProvider(create: (_)=> AuthProvider()),
+    ChangeNotifierProvider(create: (_)=> ProfileProvider()),
   ], child: MyApp(),));
 }
 

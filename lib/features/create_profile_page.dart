@@ -1,11 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:portalixmx_visitor_app/features/main_menu/main_menu_page.dart';
 import 'package:portalixmx_visitor_app/res/app_colors.dart';
 import 'package:portalixmx_visitor_app/res/app_textstyles.dart';
 import 'package:portalixmx_visitor_app/widgets/app_textfield_widget.dart';
 import 'package:portalixmx_visitor_app/widgets/bg_logo_screen.dart';
 import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/profile_provider.dart';
 import '../widgets/primary_btn.dart';
 
 class CreateProfilePage extends StatefulWidget {
@@ -29,6 +35,8 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
   final TextEditingController _purposeOfVisitController =
       TextEditingController();
 
+  late ProfileProvider _provider;
+  XFile? _imagePicked;
   @override
   void dispose() {
     _fullNameController.dispose();
@@ -43,6 +51,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    _provider = Provider.of<ProfileProvider>(context);
     return ScreenWithBgLogo(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -65,7 +74,8 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                     CircleAvatar(
                       radius: 45,
                       backgroundColor: AppColors.btnColor,
-                      child: Center(child: Icon(Icons.person, size: 50, color: Colors.white,)),
+                      backgroundImage: _imagePicked != null ? FileImage(File(_imagePicked!.path)) : null,
+                      child: _imagePicked != null ? null : Center(child: Icon(Icons.person, size: 50, color: Colors.white,)),
                     ),
                     Positioned(
                         bottom: 10,
@@ -73,7 +83,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                         child: CircleAvatar(
                           radius: 15,
                       backgroundColor: Colors.white,
-                      child: Icon(Icons.edit, color: AppColors.primaryColor,),
+                      child: GestureDetector(onTap: _onPickImageTap, child: Icon(Icons.edit, color: AppColors.primaryColor,))
                     ))
                   ],
                 ),
@@ -99,7 +109,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                     SizedBox(
                       height: 50,
                       width: double.infinity,
-                      child: PrimaryBtn(onTap: _onNextTap, btnText: AppLocalizations.of(context)!.next,),
+                      child: PrimaryBtn(onTap: _onNextTap, btnText: AppLocalizations.of(context)!.next, isLoading: _provider.updatingProfile,),
                     ),
                   ],
                 ),
@@ -111,7 +121,43 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
     );
   }
 
-  void _onNextTap(){
+  void _onNextTap()async{
 
+    String userName = _fullNameController.text.trim();
+    // String email = _emailController.text.trim();
+    String identificationType = _identificationTypeController.text.trim();
+    String licensePlate = _licensePlatController.text.trim();
+    // String vehicleModel = _vehicleModelController.text.trim();
+    String vehicleColor = _vehicleColorTypeController.text.trim();
+    // String purposeOfVisit = _purposeOfVisitController.text.trim();
+
+    Map<String, dynamic> map = {
+      'img' :_imagePicked!.path,
+      'name' : userName,
+      'mobile' : identificationType,
+      "additionalDetails": {
+        "vehicleName": '',
+        "color":  vehicleColor,
+        "licensePlate": licensePlate,
+        "registrationNumber": '',
+      },
+      "emergencyContacts": []
+    };
+
+    bool result = await context.read<ProfileProvider>().updateUserProfile(data: map);
+    if(result){
+      // userProvider.setUserName(name: _userName);
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.profileInfoUpdated);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=> MainMenuPage()), (val)=> false);
+    }
+  }
+
+  void _onPickImageTap() async{
+    final imagePicker = ImagePicker();
+    XFile? pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    if(pickedImage != null){
+      _imagePicked = pickedImage;
+      setState(() {});
+    }
   }
 }

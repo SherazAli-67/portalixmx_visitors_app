@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -60,13 +59,16 @@ class ApiService {
   }
 
 
-  Future<bool> uploadReportWithImages({required String reportText, required List<File> images,}) async {
+  Future<bool> updateProfile(
+      {
+        required Map<String, dynamic> map
+      }) async {
     bool result = false;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? token = sharedPreferences.getString("token");
     if(token != null){
-      final url = Uri.parse("https://admin.portalixmx.com/api/app-api/save-report");
 
+      final url = Uri.parse("https://admin.portalixmx.com/api/app-api/update-profile");
       var request = http.MultipartRequest('POST', url);
 
       request.headers.addAll({
@@ -75,27 +77,27 @@ class ApiService {
       });
 
       // Add complaint text
-      request.fields['report_text'] = reportText;
+      request.fields['name'] = map['name'];
+      request.fields['mobile'] = map['mobile'];
+      request.fields['additionalDetails'] = jsonEncode(map['additionalDetails']);
+      request.fields['emergencyContacts'] = jsonEncode([]);
 
-      // Add multiple image files with SAME key
-      for (var image in images) {
-        final mimeType = lookupMimeType(image.path) ?? 'image/jpeg';
-        final mimeSplit = mimeType.split('/');
 
-        request.files.add(
-          await http.MultipartFile.fromPath(
-            'img',
-            image.path,
-            contentType: MediaType(mimeSplit[0], mimeSplit[1]),
-            filename: basename(image.path),
-          ),
-        );
-      }
+      final mimeType = lookupMimeType(map['img']) ?? 'image/jpeg';
+      final mimeSplit = mimeType.split('/');
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'img',
+          map['img'],
+          contentType: MediaType(mimeSplit[0], mimeSplit[1]),
+          filename: basename(map['img']),
+        ),
+      );
       // Send request
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
 
-      debugPrint("addReport api response: ${responseBody}");
+      debugPrint("update profile api response: $responseBody");
       if(response.statusCode == 200){
         result = true;
       }

@@ -32,5 +32,6 @@
   "logout" : "Log out",
   "update" : "Update",
   "emergency" : "Emergency",
-  "phone" : "Phone"
+  "phone" : "Phone",
+  "profileInfoUpdated" : "Profile updated"
 }

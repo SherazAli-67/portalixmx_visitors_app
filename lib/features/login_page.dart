@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portalixmx_visitor_app/features/create_profile_page.dart';
-import 'package:portalixmx_visitor_app/features/main_menu/main_menu_page.dart';
 import 'package:portalixmx_visitor_app/providers/auth_provider.dart';
 import 'package:portalixmx_visitor_app/widgets/app_textfield_widget.dart';
 import 'package:portalixmx_visitor_app/widgets/primary_btn.dart';

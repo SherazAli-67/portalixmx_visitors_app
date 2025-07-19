@@ -95,7 +95,7 @@ class ApiService {
       final response = await request.send();
       final responseBody = await response.stream.bytesToString();
 
-      debugPrint("addReport api response: ${responseBody}");
+      debugPrint("addReport api response: $responseBody");
       if(response.statusCode == 200){
         result = true;
       }

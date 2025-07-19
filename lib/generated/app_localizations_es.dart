@@ -108,4 +108,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get phone => 'Phone';
+
+  @override
+  String get profileInfoUpdated => 'Profile updated';
 }
