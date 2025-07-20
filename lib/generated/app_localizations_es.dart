@@ -111,4 +111,15 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profileInfoUpdated => 'Profile updated';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String updateYour(Object userInfo) {
+    return 'Update your $userInfo';
+  }
+
+  @override
+  String get emergencyCommunication => 'Emergency Communication';
 }

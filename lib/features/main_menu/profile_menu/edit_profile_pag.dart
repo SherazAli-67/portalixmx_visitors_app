@@ -1,20 +1,52 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:portalixmx_visitor_app/models/user_api_response_model.dart';
+import 'package:provider/provider.dart';
 
-import '../../../res/app_colors.dart';
+import '../../../generated/app_localizations.dart';
+import '../../../providers/home_provider.dart';
+import '../../../providers/profile_provider.dart';
+import '../../../res/app_constants.dart';
 import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
+import '../../../widgets/app_textfield_widget.dart';
 import '../../../widgets/bg_gradient_screen.dart';
 import '../../../widgets/primary_btn.dart';
 
-class EditProfilePage extends StatelessWidget{
+class EditProfilePage extends StatefulWidget{
   const EditProfilePage({super.key});
 
   @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+
+  late String _userName;
+  late String _emailAddress;
+  late String _userPhone;
+  XFile? _imagePicked;
+  late ProfileProvider provider;
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      final provider = Provider.of<ProfileProvider>(context, listen: false);
+      _userName = provider.user!.name;
+      _emailAddress = provider.user!.email;
+      _userPhone = provider.user!.mobile;
+      setState(() {});
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    provider = Provider.of<ProfileProvider>(context);
     return BgGradientScreen(child: Column(
       children: [
         Padding(
@@ -28,7 +60,6 @@ class EditProfilePage extends StatelessWidget{
             ],
           ),
         ),
-
         Expanded(
           child: SizedBox(
             width: double.infinity,
@@ -49,30 +80,46 @@ class EditProfilePage extends StatelessWidget{
                             child: ListView(
                               children: [
                                 EditProfileItemWidget(
-                                  title: AppLocalizations.of(context)!.name, value: "Muhammad Ali", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.name,
+                                  value: _userName,
+                                  onTap: (){
+                                    _onEditTap(title: AppLocalizations.of(context)!.name, value: _userName, onUpdated: (val) {
+                                      if(val.isNotEmpty){
+                                        _userName = val;
+                                        setState(() {});
+                                      }
+                                    });
+                                  },),
                                 EditProfileItemWidget(
-                                  title: AppLocalizations.of(context)!.email, value: "imtiazkhansoomro@gmail.com", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.email,
+                                  value: _emailAddress,
+                                  onTap: (){},),
                                 EditProfileItemWidget(
-                                  title: AppLocalizations.of(context)!.phone, value: "+92 3072215500", onTap: () {},),
+                                  title: AppLocalizations.of(context)!.phone,
+                                  value: _userPhone,
+                                  onTap: (){
+                                    _onEditTap(title: AppLocalizations.of(context)!.phone,  value: _userPhone, onUpdated: (val) {
+                                      if(val.isNotEmpty){
+                                        _userPhone = val;
+                                        setState(() {});
+                                      }
+                                    });
+                                  },),
                                 EditProfileItemWidget(
                                   title: AppLocalizations.of(context)!.password, value: "*********", onTap: () {},),
 
                                 const SizedBox(height: 30,),
-                                Text(AppLocalizations.of(context)!.vehicleInformation, style: TextStyle(fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.primaryColor),),
 
-                                EditProfileItemWidget(
-                                  title: AppLocalizations.of(context)!.vehicleModel, value: "Motorolla Car", onTap: () {},),
-                                EditProfileItemWidget(title: AppLocalizations.of(context)!.vehicleColor, value: "Red", onTap: () {},),
-                                EditProfileItemWidget(
-                                  title: AppLocalizations.of(context)!.licensePlate, value: "KL76 HJ 8979", onTap: () {},),
                                 Padding(
                                   padding: EdgeInsets.only(top: 40,bottom: size.height*0.05),
-                                  child: SizedBox(
-                                    height: 50,
-                                    width: double.infinity,
-                                    child: PrimaryBtn(onTap: () {}, btnText: AppLocalizations.of(context)!.update),
+                                  child: Consumer<ProfileProvider>(
+                                      builder: (context, provider,  _) {
+                                        return SizedBox(
+                                          height: 50,
+                                          width: double.infinity,
+                                          child: PrimaryBtn(onTap: _onUpdateTap, btnText: AppLocalizations.of(context)!.update, isLoading: provider.updatingProfile,),
+                                        );
+                                      }
                                   ),
                                 ),
                               ],
@@ -83,20 +130,26 @@ class EditProfilePage extends StatelessWidget{
                 Column(
                   spacing: 5,
                   children: [
-                    CircleAvatar(
-                      radius: 65,
-                      backgroundColor: Colors.white,
+                    GestureDetector(
+                      onTap: _onPickImageTap,
                       child: CircleAvatar(
-                        radius: 60,
-                        backgroundImage: CachedNetworkImageProvider(AppIcons.icUserImageUrl),
+                        radius: 65,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: _imagePicked != null
+                              ? FileImage(File(_imagePicked!.path))
+                              : CachedNetworkImageProvider(
+                              provider.user!.image.replaceAll('public', AppConstants.imageBaseUrl)),
+                        ),
                       ),
                     ),
-                    Text("Muhammad Ali", style: AppTextStyles.bottomSheetHeadingTextStyle.copyWith(color: Colors.black),),
-                    InkWell(
+                    Text(_userName, style: AppTextStyles.bottomSheetHeadingTextStyle.copyWith(color: Colors.black),),
+                    /*  InkWell(
                         onTap: (){
-                          // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> EditProfilePage()));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> EditProfilePage()));
                         },
-                        child: Text(AppLocalizations.of(context)!.viewProfile, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black),))
+                        child: Text("View Profile", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black),))*/
                   ],
                 ),
               ],
@@ -106,16 +159,88 @@ class EditProfilePage extends StatelessWidget{
       ],
     ));
   }
+
+  void _onEditTap({required String title, required String value, required Function(String updatedVal) onUpdated}){
+    TextEditingController editingController = TextEditingController(text: value);
+    showModalBottomSheet(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12))),
+        context: context,
+        isScrollControlled: true,
+        builder: (ctx){
+          return Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                spacing: 16,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(AppLocalizations.of(context)!.editProfile, style: AppTextStyles.tileTitleTextStyle,),
+                      IconButton(onPressed: ()=> Navigator.of(context).pop(), icon: Icon(Icons.close_rounded))
+                    ],
+                  ),
+                  Text(AppLocalizations.of(context)!.updateYour(title), style: AppTextStyles.btnTextStyle.copyWith(color: Colors.black),),
+                  AppTextField(textController: editingController, hintText: title)
+                ],
+              ),
+            ),
+          );
+        }).then((_){
+      onUpdated(editingController.text.trim());
+      editingController.dispose();
+    });
+  }
+
+  void _onPickImageTap()async{
+    ImagePicker imagePicker = ImagePicker();
+    XFile? selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    if(selectedImage != null){
+      _imagePicked = selectedImage;
+      setState(() {});
+    }
+  }
+  Future<void> _onUpdateTap() async {
+
+    final map = {
+      'name' : _userName,
+      'img' : _imagePicked != null ? _imagePicked!.path : "",
+      'mobile' : _userPhone,
+      "additionalDetails": {
+        "vehicleName": provider.user!.additionalDetails.vehicleName,
+        "color":  provider.user!.additionalDetails.color,
+        "licensePlate": provider.user!.additionalDetails.licensePlate,
+        "registrationNumber": provider.user!.additionalDetails.registrationNumber
+      },
+      "emergencyContacts": provider.user!.emergencyContacts
+    };
+
+    bool result = await context.read<ProfileProvider>().updateUserProfile(data: map, onProfileUpdated: _onProfileUpdated);
+    if(result){
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.profileInfoUpdated);
+      Navigator.of(context).pop();
+    }
+  }
+
+  void _onProfileUpdated(UserModel user){
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    homeProvider.updateUser(user);
+  }
 }
 
 class EditProfileItemWidget extends StatelessWidget {
   const EditProfileItemWidget({
     super.key,
-    required String title, required String value, required VoidCallback onTap,
-  }): _title = title, _value = value, _onTap = onTap;
+    required String title, required String value, required VoidCallback onTap, List<String>? emergencyContacts
+  }): _title = title, _value = value, _onTap = onTap, _emergencyContacts = emergencyContacts;
   final String _title;
   final String _value;
   final VoidCallback _onTap;
+  final List<String>? _emergencyContacts;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -131,13 +256,20 @@ class EditProfileItemWidget extends StatelessWidget {
               InkWell(onTap: _onTap, child: SvgPicture.asset(AppIcons.icProfileEdit))
             ],
           ),
-          Column(
+          _emergencyContacts == null ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(_value, style: AppTextStyles.editProfileSubHeadingTextStyle,),
               Divider()
             ],
+          ) : Column(
+            spacing: 10,
+            children: _emergencyContacts.map((contact){
+              return Text(contact, style: AppTextStyles.editProfileSubHeadingTextStyle,);
+            }).toList(),
           )
+
+
         ],
       ),
     );

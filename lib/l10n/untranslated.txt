@@ -27,6 +27,9 @@
     "update",
     "emergency",
     "phone",
-    "profileInfoUpdated"
+    "profileInfoUpdated",
+    "editProfile",
+    "updateYour",
+    "emergencyCommunication"
   ]
 }

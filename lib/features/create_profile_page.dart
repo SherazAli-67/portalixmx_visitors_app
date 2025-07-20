@@ -10,6 +10,7 @@ import 'package:portalixmx_visitor_app/widgets/app_textfield_widget.dart';
 import 'package:portalixmx_visitor_app/widgets/bg_logo_screen.dart';
 import 'package:portalixmx_visitor_app/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/profile_provider.dart';
 import '../widgets/primary_btn.dart';
@@ -146,7 +147,8 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
 
     bool result = await context.read<ProfileProvider>().updateUserProfile(data: map);
     if(result){
-      // userProvider.setUserName(name: _userName);
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.setBool("isLoggedIn", true);
       Fluttertoast.showToast(msg: AppLocalizations.of(context)!.profileInfoUpdated);
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=> MainMenuPage()), (val)=> false);
     }

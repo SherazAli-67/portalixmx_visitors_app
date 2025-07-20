@@ -9,7 +9,7 @@ class LoadingWidget extends StatelessWidget{
   const LoadingWidget({super.key, this.color  = Colors.white});
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS ? CupertinoActivityIndicator(color: color,) : CircularProgressIndicator(color: color,);
+    return Center(child: Platform.isIOS ? CupertinoActivityIndicator(color: color,) : CircularProgressIndicator(color: color,));
   }
 
 }

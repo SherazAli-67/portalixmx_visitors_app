@@ -33,5 +33,8 @@
   "update" : "Update",
   "emergency" : "Emergency",
   "phone" : "Phone",
-  "profileInfoUpdated" : "Profile updated"
+  "profileInfoUpdated" : "Profile updated",
+  "editProfile" : "Edit Profile",
+   "updateYour" : "Update your {userInfo}",
+   "emergencyCommunication" : "Emergency Communication"
 }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../features/login_page.dart';
+import '../models/emergency_contact_api_response.dart';
 import '../models/user_api_response_model.dart';
 import '../res/api_constants.dart';
 import '../res/app_constants.dart';
@@ -14,15 +15,15 @@ class ProfileProvider extends ChangeNotifier{
   final _apiService = ApiService();
   bool _loadingProfile = false;
   bool _updatingProfile = false;
-  // final _emergencyContactKey = 'emergencyContacts';
+  final _emergencyContactKey = 'emergencyContacts';
 
   UserModel? _user;
-  // final List<EmergencyContact> _emergencyContacts = [];
+  final List<EmergencyContact> _emergencyContacts = [];
 
   bool get loadingProfile => _loadingProfile;
   bool get updatingProfile => _updatingProfile;
   UserModel? get user => _user;
-  // List<EmergencyContact> get emergencyContacts =>  _emergencyContacts;
+  List<EmergencyContact> get emergencyContacts =>  _emergencyContacts;
 
   ProfileProvider(){
     _initProfile();
@@ -42,16 +43,25 @@ class ProfileProvider extends ChangeNotifier{
       notifyListeners();
     }
 
-    // _initEmergencyContactList();
+    _initEmergencyContactList();
   }
 
-  Future<bool> updateUserProfile({required Map<String, dynamic> data})async {
+  Future<bool> updateUserProfile({required Map<String, dynamic> data, Function(UserModel)? onProfileUpdated})async {
 
     bool result = false;
     _updatingProfile = true;
     notifyListeners();
     try{
       result = await _apiService.updateProfile(map: data);
+      final response = await _apiService.getRequest(endpoint: ApiConstants.userProfile);
+      if(response != null){
+        UserApiResponse userApiResponse = UserApiResponse.fromJson(jsonDecode(response.body));
+        _user = userApiResponse.data;
+        notifyListeners();
+        if(onProfileUpdated != null){
+          onProfileUpdated(_user!);
+        }
+      }
       // final response = await _apiService.postRequestWithToken(endpoint: ApiConstants.updateProfile, data: data,);
     }catch(e){
       String errorMessage = e.toString();
@@ -75,7 +85,7 @@ class ProfileProvider extends ChangeNotifier{
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=> LoginPage()), (val)=> false);
   }
 
-  /*Future<bool> _initEmergencyContactList() async{
+  Future<bool> _initEmergencyContactList() async{
     bool result = false;
     try{
       final response = await _apiService.getRequest(endpoint: ApiConstants.emergencyContactList);
@@ -103,5 +113,5 @@ class ProfileProvider extends ChangeNotifier{
     _updatingProfile = false;
     notifyListeners();
     return result;
-  }*/
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserApiResponse {
   final String message;
   final bool status;
@@ -58,6 +60,19 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    // Decode additionalDetails which is a JSON string
+    final additionalDetailsMap = json['additionalDetails'] is String
+        ? jsonDecode(json['additionalDetails'])
+        : json['additionalDetails'];
+
+    // Decode emergencyContacts which is a list with a single string like ["[]"]
+    List<String> emergencyContactsList = [];
+    if (json['emergencyContacts'] is List &&
+        json['emergencyContacts'].isNotEmpty) {
+      final decoded = jsonDecode(json['emergencyContacts'][0]); // decode "[]"
+      emergencyContactsList = List<String>.from(decoded);
+    }
+
     return UserModel(
       id: json['_id'],
       name: json['name'],
@@ -71,11 +86,72 @@ class UserModel {
       userId: json['userId'],
       createdBy: json['createdBy'],
       associatedSociety: json['associatedSociety'],
-      emergencyContacts: List<String>.from(json['emergencyContacts']),
+      emergencyContacts: emergencyContactsList,
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
       v: json['__v'],
-      additionalDetails: AdditionalDetails.fromJson(json['additionalDetails']),
+      additionalDetails: AdditionalDetails.fromJson(additionalDetailsMap),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'email': email,
+      'mobile': mobile,
+      'password': password,
+      'role': role,
+      'image': image,
+      'isRemoved': isRemoved,
+      'status': status,
+      'userId': userId,
+      'createdBy': createdBy,
+      'associatedSociety': associatedSociety,
+      'emergencyContacts': emergencyContacts,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      '__v': v,
+      'additionalDetails': additionalDetails.toJson(),
+    };
+  }
+  UserModel copyWith({
+    String? name,
+    String? email,
+    String? mobile,
+    String? password,
+    String? role,
+    String? image,
+    bool? isRemoved,
+    String? status,
+    String? userId,
+    String? createdBy,
+    String? associatedSociety,
+    List<String>? emergencyContacts,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? v,
+    AdditionalDetails? additionalDetails,
+    String? id,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      mobile: mobile ?? this.mobile,
+      password: password ?? this.password,
+      role: role ?? this.role,
+      image: image ?? this.image,
+      isRemoved: isRemoved ?? this.isRemoved,
+      status: status ?? this.status,
+      userId: userId ?? this.userId,
+      createdBy: createdBy ?? this.createdBy,
+      associatedSociety: associatedSociety ?? this.associatedSociety,
+      emergencyContacts: emergencyContacts ?? this.emergencyContacts,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      v: v ?? this.v,
+      additionalDetails: additionalDetails ?? this.additionalDetails,
     );
   }
 }
@@ -100,5 +176,14 @@ class AdditionalDetails {
       licensePlate: json['licensePlate'],
       registrationNumber: json['registrationNumber'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'vehicleName': vehicleName,
+      'color': color,
+      'licensePlate': licensePlate,
+      'registrationNumber': registrationNumber,
+    };
   }
 }

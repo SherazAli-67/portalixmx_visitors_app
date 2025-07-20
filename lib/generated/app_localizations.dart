@@ -301,6 +301,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile updated'**
   String get profileInfoUpdated;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @updateYour.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your {userInfo}'**
+  String updateYour(Object userInfo);
+
+  /// No description provided for @emergencyCommunication.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Communication'**
+  String get emergencyCommunication;
 }
 
 class _AppLocalizationsDelegate

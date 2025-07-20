@@ -44,7 +44,6 @@ class AuthProvider extends ChangeNotifier{
           await sharedPreferences.setString("token", token);
           await sharedPreferences.setString("userID", userID);
           await sharedPreferences.setString("userName", userName);
-          await sharedPreferences.setBool("isLoggedIn", true);
         }else{
           Fluttertoast.showToast(msg: "Invalid Guard Credentials");
         }
