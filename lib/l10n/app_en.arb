@@ -36,5 +36,8 @@
   "profileInfoUpdated" : "Profile updated",
   "editProfile" : "Edit Profile",
    "updateYour" : "Update your {userInfo}",
-   "emergencyCommunication" : "Emergency Communication"
+   "emergencyCommunication" : "Emergency Communication",
+   "show" : "Show",
+   "hide" : "Hide",
+   "invalidCredentialsMessage" : "Invalid Visitor Login Credentials"
 }

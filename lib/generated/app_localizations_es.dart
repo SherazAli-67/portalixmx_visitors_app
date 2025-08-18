@@ -9,117 +9,127 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'PortalixMX';
+  String get appTitle => 'Portalixmx';
 
   @override
-  String get visitorLogin => 'Visitor Login';
+  String get visitorLogin => 'Acceso de Visitante';
 
   @override
-  String get email => 'Email';
+  String get email => 'Correo electrónico';
 
   @override
-  String get password => 'Password';
+  String get password => 'Contraseña';
 
   @override
-  String get login => 'Login';
+  String get login => 'Iniciar sesión';
 
   @override
-  String get forgetPassword => 'Forget your password';
+  String get forgetPassword => 'Olvidaste tu contraseña?';
 
   @override
   String welcomeMessage(Object name) {
-    return 'Bienvenido $name';
+    return 'Bienvenido $name!';
   }
 
   @override
-  String get visitors => 'Visitors';
+  String get visitors => 'Visitantes';
 
   @override
-  String get fullName => 'Full Name';
+  String get fullName => 'Nombre Completo';
 
   @override
-  String get emailAddress => 'Email Address';
+  String get emailAddress => 'Dirección de Correo';
 
   @override
-  String get identificationTypeAndNumber => 'Identification Type and Number';
+  String get identificationTypeAndNumber => 'Tipo y Número de Identificación';
 
   @override
-  String get vehicleInformation => 'Vehicle Information';
+  String get vehicleInformation => 'Información del Vehículo';
 
   @override
-  String get licensePlate => 'License Plate';
+  String get licensePlate => 'Placa';
 
   @override
-  String get vehicleModel => 'Vehicle Model';
+  String get vehicleModel => 'Modelo del Vehículo';
 
   @override
-  String get vehicleColor => 'Vehicle Color';
+  String get vehicleColor => 'Color del Vehículo';
 
   @override
-  String get purposeOfVisit => 'Purpose of Visit';
+  String get purposeOfVisit => 'Propósito de la Visita';
 
   @override
-  String get next => 'Next';
+  String get next => 'Siguiente';
 
   @override
-  String get createProfile => 'Create Profile';
+  String get createProfile => 'Crear Perfil';
 
   @override
-  String get qrCode => 'QR Code';
+  String get qrCode => 'Código QR';
 
   @override
-  String get access => 'Access';
+  String get access => 'Acceso';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Perfil';
 
   @override
-  String get date => 'Date';
+  String get date => 'Fecha';
 
   @override
-  String get time => 'Time';
+  String get time => 'Hora';
 
   @override
-  String get contact => 'Contact';
+  String get contact => 'Contacto';
 
   @override
-  String get name => 'Name';
+  String get name => 'Nombre';
 
   @override
-  String get shareKey => 'Share Key';
+  String get shareKey => 'Compartir Clave';
 
   @override
-  String get viewProfile => 'View Profile';
+  String get viewProfile => 'Ver Perfil';
 
   @override
-  String get emergencyCalls => 'Emergency Calls';
+  String get emergencyCalls => 'Llamadas de Emergencia';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'Política de Privacidad';
 
   @override
-  String get logout => 'Log out';
+  String get logout => 'Cerrar sesión';
 
   @override
-  String get update => 'Update';
+  String get update => 'Actualizar';
 
   @override
-  String get emergency => 'Emergency';
+  String get emergency => 'Emergencia';
 
   @override
-  String get phone => 'Phone';
+  String get phone => 'Teléfono';
 
   @override
-  String get profileInfoUpdated => 'Profile updated';
+  String get profileInfoUpdated => 'Perfil actualizado';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'Editar Perfil';
 
   @override
   String updateYour(Object userInfo) {
-    return 'Update your $userInfo';
+    return 'Actualiza tu $userInfo';
   }
 
   @override
-  String get emergencyCommunication => 'Emergency Communication';
+  String get emergencyCommunication => 'Comunicación de Emergencia';
+
+  @override
+  String get show => 'Mostrar';
+
+  @override
+  String get hide => 'Ocultar';
+
+  @override
+  String get invalidCredentialsMessage =>
+      'Credenciales de inicio de sesión de visitante no válidas';
 }

@@ -96,7 +96,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppTextField(textController: _fullNameController, hintText: AppLocalizations.of(context)!.fullName),
-                    AppTextField(textController: _emailController, hintText: AppLocalizations.of(context)!.email),
+                    AppTextField(textController: _emailController, hintText: AppLocalizations.of(context)!.email, textInputType: TextInputType.emailAddress,),
                     AppTextField(textController: _identificationTypeController, hintText: AppLocalizations.of(context)!.identificationTypeAndNumber),
                     Text(AppLocalizations.of(context)!.vehicleInformation, style: AppTextStyles.regularTextStyle,),
                     

@@ -38,7 +38,7 @@ class HomeProvider extends ChangeNotifier{
       _user = userApiResponse.data;
       _loadingProfile = false;
       notifyListeners();
-      sharedPreferences.setString(_userKey, jsonEncode(_user!.toJson()));
+      // sharedPreferences.setString(_userKey, jsonEncode(_user!.toJson()));
     }
   }
 
@@ -61,6 +61,6 @@ class HomeProvider extends ChangeNotifier{
     notifyListeners();
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString(_userKey, jsonEncode(_user!.toJson()));
+    // sharedPreferences.setString(_userKey, jsonEncode(_user!.toJson()));
   }
 }

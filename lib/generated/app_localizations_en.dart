@@ -122,4 +122,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emergencyCommunication => 'Emergency Communication';
+
+  @override
+  String get show => 'Show';
+
+  @override
+  String get hide => 'Hide';
+
+  @override
+  String get invalidCredentialsMessage => 'Invalid Visitor Login Credentials';
 }

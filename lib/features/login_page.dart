@@ -32,13 +32,13 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Text(AppLocalizations.of(context)!.visitorLogin, style: AppTextStyles.headingTextStyle),
             const SizedBox(height: 16,),
-            AppTextField(textController: _emailController, hintText: AppLocalizations.of(context)!.email,),
+            AppTextField(textController: _emailController, hintText: AppLocalizations.of(context)!.email, textInputType: TextInputType.emailAddress,),
             AppTextField(textController: _passwordController, hintText: AppLocalizations.of(context)!.password, isPassword: true,),
             const Spacer(),
             SizedBox(
               height: 50,
               width: double.infinity,
-              child: PrimaryBtn(onTap: _onLoginTap, btnText: AppLocalizations.of(context)!.login),
+              child: PrimaryBtn(onTap: _onLoginTap, btnText: AppLocalizations.of(context)!.login, isLoading: provider.isLogging,),
             ),
             TextButton(onPressed: (){
               // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> OtpPage()));
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    bool result = await provider.onLoginTap(email: emailAddress, password: password);
+    bool result = await provider.onLoginTap(email: emailAddress, password: password, context);
     if(result){
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> CreateProfilePage()), (val)=> false);
     }
