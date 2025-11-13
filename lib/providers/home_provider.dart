@@ -61,6 +61,11 @@ class HomeProvider extends ChangeNotifier{
     notifyListeners();
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // sharedPreferences.setString(_userKey, jsonEncode(_user!.toJson()));
+    // sharedPreferences.setString(_userKey,
+    //
+    //
+    //
+    //
+    // (_user!.toJson()));
   }
 }
