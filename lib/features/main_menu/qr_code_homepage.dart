@@ -79,13 +79,13 @@ class _QRCodePageState extends State<QRCodePage> {
                 const SizedBox(height: 20,),
                 Text(AppLocalizations.of(context)!.qrCode, style: AppTextStyles.visitorDetailTitleTextStyle.copyWith(color: Colors.white),),
                 Image.asset(AppIcons.icQRCode),
-                Container(
+                /*Container(
                   height: 50,
                   margin: EdgeInsets.only(bottom: 40),
                   width: double.infinity,
                   child: PrimaryBtn(
                     onTap: _shareQrCode, btnText: AppLocalizations.of(context)!.shareKey, color: AppColors.primaryColor,),
-                )
+                )*/
               ],
             )
         ),
